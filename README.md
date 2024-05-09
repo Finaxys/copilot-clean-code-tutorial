@@ -36,9 +36,11 @@ generate one unit test to
 2. assertThat actualResponse body is equal to expectedProduct
 test method name should be should_invoke_product_service_to_find_product_by_id
 
-use Mockito to mock method PurchaseService, do not use @Mock or @InjectMock
-PurchaseService must be injected in PurchaseController by constructor
-purchaseService and purchaseController variables must be final
+use Mockito to mock method ProductService, do not use @Mock or @InjectMock
+user AssertJ to compare actual and expected response
+do not use setUp method
+ProductService must be injected in ProductController by constructor
+productService and productController variables must be final
 test class and test method must be of scope package
 ```
 
@@ -61,6 +63,6 @@ use @GetMapping to map the end-point
 ## Création d'un nouvel end-point qui retourne toutes les clients ayant acheté le même produit
 
 ```prompt
-generate a new test in ProductControllerTest to verify that ProductController invokes ProductService to find all products for a customer
+generate a new test in ProductControllerTest to verify that ProductController invokes ProductService to find customers that bought a product by product id
 test method name should be should_invoke_product_service_to_find_all_customers_having_bought_product
 ```
