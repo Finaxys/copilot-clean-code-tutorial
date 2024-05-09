@@ -1,6 +1,6 @@
 # Copilot + Clean Code démo
 
-# Première Partie: Copilot seul
+# Première Partie: l'Approche naïve
 
 On a créé une application CustomerApplication en adoptant une méthode de bas en haut; c'est-à-dire qu'on est partie des classes de plus bas niveau, les classes les plus techniques (fichiers SQL, repository...) et on est remonté progressivement vers les classes les plus métiers (les services, les controllers...).
 
@@ -21,3 +21,18 @@ On a réussi à créer une application CRUD complètement fonctionelle en très 
 - le end-point DELETE /customers/{id} procède à du hard-delete. Pour une vraie application il serait recommandé de procéder à du soft-delete. Ceci entraîne beaucoup de questions d'un point de vue métier
 - on a eu malgré tout besoin de guider CoPilot pour lui faire comprendre certaines choses, en particulier la classe de test du controller
 - les classes de test manquent de pertinence, testant des choses qui ne devraient pas être testées, n'utilisent pas toutes les possibilités que les librairies inclues dans le pom.xml offrent (AssertJ, Lombok...)
+
+# Deuxième Partie: Utilisation de Clean Code et de l'IA gen en synergie
+
+Développement d'un nouvel end-point
+
+## Création d'une classe de test PurchaseControllerTest
+
+```prompt
+in class PurchaseControllerTest
+generate one unit test to verify that PurchaseController invokes PurchaseService to find purchase by id
+use Mockito to mock method PurchaseService, do not use @Mock or @InjectMock
+PurchaseService must be injected in PurchaseController by constructor
+purchaseService and purchaseController variables must be final
+test class and test method must be of scope package
+```
