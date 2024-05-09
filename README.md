@@ -35,4 +35,21 @@ use Mockito to mock method PurchaseService, do not use @Mock or @InjectMock
 PurchaseService must be injected in PurchaseController by constructor
 purchaseService and purchaseController variables must be final
 test class and test method must be of scope package
+test method name should be should_invoke_purchase_service_to_find_purchase_by_id
+```
+
+## Création de la classe PurchaseController
+
+Création de la classe PurchaseController en utilisant les suggestions de CoPilot
+
+Amélioration de la classe en utilisant le prompt suivant:
+
+```prompt
+generate a class PurchaseController as a @RequestController 
+to implement end-point GET /purchases/{id} as tested in PurchaseControllerTest in method should_invoke_purchase_service_to_find_purchase_by_id
+use PurchaseService to find purchase by id
+Purchase service must be final and injected by constructor
+use Lombok to inject PurchaseService in PurchaseController
+use @PathVariable to get id from request
+use @GetMapping to map the end-point
 ```
