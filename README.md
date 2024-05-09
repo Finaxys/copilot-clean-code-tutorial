@@ -26,15 +26,15 @@ On a réussi à créer une application CRUD complètement fonctionelle en très 
 
 Développement d'un nouvel end-point
 
-## Création d'une classe de test PurchaseControllerTest
+## Création d'une classe de test ProductControllerTest
 
 ```prompt
-in class PurchaseControllerTest
+in class ProductControllerTest
 
 generate one unit test to 
-1. verify that PurchaseController invokes PurchaseService to find purchase by id
-2. assertThat actualResponse body is equal to expectedPurchase
-test method name should be should_invoke_purchase_service_to_find_purchase_by_id
+1. verify that ProductController invokes ProductService to find product by id
+2. assertThat actualResponse body is equal to expectedProduct
+test method name should be should_invoke_product_service_to_find_product_by_id
 
 use Mockito to mock method PurchaseService, do not use @Mock or @InjectMock
 PurchaseService must be injected in PurchaseController by constructor
@@ -42,25 +42,25 @@ purchaseService and purchaseController variables must be final
 test class and test method must be of scope package
 ```
 
-## Création de la classe PurchaseController
+## Création de la classe ProductController
 
-Création de la classe PurchaseController en utilisant les suggestions de CoPilot
+Création de la classe ProductController en utilisant les suggestions de CoPilot
 
 Amélioration de la classe en utilisant le prompt suivant:
 
 ```prompt
-generate a class PurchaseController as a @RequestController 
-to implement end-point GET /purchases/{id} as tested in PurchaseControllerTest in method should_invoke_purchase_service_to_find_purchase_by_id
-use PurchaseService to find purchase by id
-Purchase service must be final and injected by constructor
-use Lombok to inject PurchaseService in PurchaseController
+generate a class ProductController as a @RequestController 
+to implement end-point GET /products/{id} as tested in ProductControllerTest in method should_invoke_product_service_to_find_product_by_id
+use ProductService to find product by id
+Product service must be final and injected by constructor
+use Lombok to inject ProductService in ProductController
 use @PathVariable to get id from request
 use @GetMapping to map the end-point
 ```
 
-## Création d'un nouvel end-point qui retourne toutes les commandes d'un client
+## Création d'un nouvel end-point qui retourne toutes les clients ayant acheté le même produit
 
 ```prompt
-generate a new test in PurchaseControllerTest to verify that PurchaseController invokes PurchaseService to find all purchases for a customer
-test method name should be should_invoke_purchase_service_to_find_all_customers_for_purchase
+generate a new test in ProductControllerTest to verify that ProductController invokes ProductService to find all products for a customer
+test method name should be should_invoke_product_service_to_find_all_customers_having_bought_product
 ```
