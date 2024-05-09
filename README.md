@@ -33,8 +33,8 @@ in class ProductControllerTest
 
 generate one unit test to 
 1. verify that ProductController invokes ProductService to find product by id
-2. assertThat actualResponse status is equal to 200
-3. assertThat actualResponse body is equal to expectedProduct
+2. assert that actualResponse status is equal to 200
+3. assert that actualResponse body is equal to expectedProduct
 test method name should be should_invoke_product_service_to_find_product_by_id
 
 use Mockito to mock method ProductService, do not use @Mock or @InjectMock
