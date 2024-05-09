@@ -33,12 +33,14 @@ in class ProductControllerTest
 
 generate one unit test to 
 1. verify that ProductController invokes ProductService to find product by id
-2. assertThat actualResponse body is equal to expectedProduct
+2. assertThat actualResponse status is equal to 200
+3. assertThat actualResponse body is equal to expectedProduct
 test method name should be should_invoke_product_service_to_find_product_by_id
 
 use Mockito to mock method ProductService, do not use @Mock or @InjectMock
-user AssertJ to compare actual and expected response
+use AssertJ to compare actual and expected response
 do not use setUp method
+use ProductDTO constructor to initiate expectedProduct
 ProductService must be injected in ProductController by constructor
 productService and productController variables must be final
 test class and test method must be of scope package
@@ -51,18 +53,21 @@ Création de la classe ProductController en utilisant les suggestions de CoPilot
 Amélioration de la classe en utilisant le prompt suivant:
 
 ```prompt
-generate a class ProductController as a @RequestController 
-to implement end-point GET /products/{id} as tested in ProductControllerTest in method should_invoke_product_service_to_find_product_by_id
+improve class ProductController as a @RequestController
+to implement end-point GET /{id} as tested in ProductControllerTest in method should_invoke_product_service_to_find_product_by_id
 use ProductService to find product by id
 Product service must be final and injected by constructor
 use Lombok to inject ProductService in ProductController
 use @PathVariable to get id from request
 use @GetMapping to map the end-point
+user @RequestMapping to map the controller uri /products
 ```
 
 ## Création d'un nouvel end-point qui retourne toutes les clients ayant acheté le même produit
 
 ```prompt
-generate a new test in ProductControllerTest to verify that ProductController invokes ProductService to find customers that bought a product by product id
-test method name should be should_invoke_product_service_to_find_all_customers_having_bought_product
+many customers may have bought the same product
+generate a new test in ProductControllerTest to 
+verify that ProductController invokes ProductService to find customers that bought a product by product id
+test method name should be should_invoke_product_service_to_find_customers_by_product_id
 ```
