@@ -48,7 +48,10 @@ jobs:
       - name: Set output
         id: feedback
         run: |
+          delimiter=":::"
+          echo "output1<<${delimiter}" >> $GITHUB_OUTPUT
           cat $HOME/output.txt >> $GITHUB_OUTPUT
+          echo "${delimiter}" >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         uses: unsplash/comment-on-pr@v1.3.0
