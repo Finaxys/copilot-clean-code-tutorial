@@ -48,7 +48,7 @@ jobs:
       - name: Set output
         id: feedback
         run: |
-          echo "Result: $(cat $HOME/output.txt)." >> $GITHUB_OUTPUT
+          echo "Result: $(cat $HOME/output.txt)."
 
       - name: Comment on PR
         uses: unsplash/comment-on-pr@v1.3.0
