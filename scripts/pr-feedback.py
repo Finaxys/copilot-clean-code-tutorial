@@ -7,7 +7,7 @@ def ask_openai(prompt):
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "system", "content": "You are a helpful assistant in computer science. When I gave you a list of files, you gave me feedback on them and rating from 0 to 10 for each of the SOLID principles"},
             {"role": "user", "content": prompt},
         ],
     )
@@ -29,7 +29,10 @@ if __name__ == '__main__':
         file_list = json.load(f)
 
     with open(args.file_output, 'w') as f:
+        data = ""
         for file in file_list:
-            f.write(f"{file}\n")
-        result = ask_openai("What do you think of these files?")
+            data += file + "\n"
+            with open (file, "r") as myfile:
+                data +=myfile.read()
+        result = ask_openai("What do you think of these files?\n" + data)
         f.write(f"{result}\n")
