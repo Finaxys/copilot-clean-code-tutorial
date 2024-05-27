@@ -40,7 +40,8 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Run Feedback script
-        run: python scripts/feedback.py $HOME/files.json
+        run: python scripts/pr-feedback.py $HOME/files.json
+        id: feedback
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
@@ -49,6 +50,6 @@ jobs:
         with:
           msg: |
             The tests have passed! 🎉
-            <!-- Add more information here if needed -->
+            ${{ steps.feedback.outputs.stdout }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
