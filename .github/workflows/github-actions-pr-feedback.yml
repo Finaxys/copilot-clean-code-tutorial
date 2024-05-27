@@ -15,6 +15,7 @@ concurrency:
 jobs:
   pr-feedback:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -34,6 +35,14 @@ jobs:
 
       - name: Show python version
         run: python --version
+
+      - name: Install requirements
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run Feedback script
+        run: python scripts/feedback.py $HOME/files.json
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       - name: Comment on PR
         uses: unsplash/comment-on-pr@v1.3.0
