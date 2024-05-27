@@ -42,7 +42,7 @@ jobs:
       - name: Run Feedback script
         run: |
           python scripts/pr-feedback.py $HOME/files.json $HOME/output.txt
-          cat $HOME/output.txt > "$GITHUB_OUTPUT"
+          echo "Result: $(cat $HOME/output.txt)." >> $GITHUB_OUTPUT
         id: feedback
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
