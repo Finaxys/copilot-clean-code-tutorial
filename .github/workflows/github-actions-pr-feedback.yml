@@ -42,10 +42,13 @@ jobs:
       - name: Run Feedback script
         run: |
           python scripts/pr-feedback.py $HOME/files.json $HOME/output.txt
-          echo "Result: $(cat $HOME/output.txt)." >> $GITHUB_OUTPUT
-        id: feedback
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Set output
+        id: feedback
+        run: |
+          echo "Result: $(cat $HOME/output.txt)." >> $GITHUB_OUTPUT
 
       - name: Comment on PR
         uses: unsplash/comment-on-pr@v1.3.0
