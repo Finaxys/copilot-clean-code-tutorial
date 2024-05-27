@@ -7,7 +7,16 @@ def ask_openai(prompt):
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant in computer science. When I gave you a list of files, you gave me feedback on them and rating from 0 to 10 for each of the SOLID principles"},
+            {"role": "system",
+             "content": (
+                 "You are a helpful assistant in computer science."
+                 "When I gave you a list of files :"
+                 "First, summarize the content of those files"
+                 "Second, give me feedback on the quality of those files"
+                 "Third, rate those files from 0 to 10 for each of the SOLID principles"
+                 "Finally, give me some examples of corrections that could be made to improve the quality of those files."
+                 )
+             },
             {"role": "user", "content": prompt},
         ],
     )
