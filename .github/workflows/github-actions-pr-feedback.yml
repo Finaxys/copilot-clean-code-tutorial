@@ -49,7 +49,7 @@ jobs:
         uses: unsplash/comment-on-pr@v1.3.0
         with:
           msg: |
-            The tests have passed! 🎉
+            The tests have passed! ${{ GITHUB_SHA }}🎉
             ${{ steps.feedback.outputs.stdout }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

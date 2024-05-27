@@ -9,3 +9,7 @@ if __name__ == '__main__':
         print("OPENAI_API_KEY environment variable must be set")
     args = parser.parse_args()
     print(args.file_list)
+
+    with open(args.file_list) as f:
+        for line in f:
+            print(line)
