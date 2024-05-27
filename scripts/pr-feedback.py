@@ -4,14 +4,14 @@ import json
 import openai
 
 def ask_openai(prompt):
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": prompt},
         ],
     )
-    return response['choices'][0]['message']['content']
+    return response.choices[0].message.content
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process some files')
