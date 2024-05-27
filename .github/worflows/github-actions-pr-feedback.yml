@@ -1,0 +1,45 @@
+name: Pull Request Feedback
+run-name: Pull Request Feedback
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  pr-feedback:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Gather files changed
+        uses: trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b
+        with:
+          fileOutput: 'json'
+
+      - name: Show files changed
+        run: cat $HOME/files.json
+
+      - name: Show scripts files
+        run: ls -lah scripts
+
+      - name: Show python version
+        run: python --version
+
+      - name: Comment on PR
+        uses: unsplash/comment-on-pr@v1.3.0
+        with:
+          msg: |
+            The tests have passed! 🎉
+            <!-- Add more information here if needed -->
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
