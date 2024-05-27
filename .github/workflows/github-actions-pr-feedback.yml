@@ -57,7 +57,7 @@ jobs:
         uses: unsplash/comment-on-pr@v1.3.0
         with:
           msg: |
-            Find below informations about code quality :🎉
+            # Find below informations about code quality :🎉
             ${{join(steps.feedback.outputs.*, '\n')}}
           check_for_duplicate_msg: false
         env:

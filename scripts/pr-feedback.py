@@ -9,7 +9,7 @@ def ask_openai(prompt):
         messages=[
             {"role": "system",
              "content": (
-                 "You are a helpful assistant in computer science."
+                 "You are a helpful assistant in computer science. You will anwer using markdown."
                  "When I gave you a list of files :"
                  "First, summarize the content of those files"
                  "Second, give me feedback on the quality of those files"
