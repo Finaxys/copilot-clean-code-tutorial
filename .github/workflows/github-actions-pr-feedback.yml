@@ -1,0 +1,64 @@
+name: Pull Request Feedback
+run-name: Pull Request Feedback
+on:
+  workflow_dispatch:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  pr-feedback:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Gather files changed
+        uses: trilom/file-changes-action@a6ca26c14274c33b15e6499323aac178af06ad4b
+        with:
+          fileOutput: 'json'
+
+      - name: Show files changed
+        run: cat $HOME/files.json
+
+      - name: Show scripts files
+        run: ls -lah scripts
+
+      - name: Show python version
+        run: python --version
+
+      - name: Install requirements
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run Feedback script
+        run: |
+          python scripts/pr-feedback.py $HOME/files.json $HOME/output.txt
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Set output
+        id: feedback
+        run: |
+          delimiter=":::"
+          echo "output1<<${delimiter}" >> $GITHUB_OUTPUT
+          cat $HOME/output.txt >> $GITHUB_OUTPUT
+          echo "${delimiter}" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR
+        uses: unsplash/comment-on-pr@v1.3.0
+        with:
+          msg: |
+            # Find below informations about code quality :🎉
+            ${{join(steps.feedback.outputs.*, '\n')}}
+          check_for_duplicate_msg: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
