@@ -55,7 +55,7 @@ jobs:
         with:
           msg: |
             The tests have passed! ${{ github.sha }}🎉
-            ${{join(steps.feedback.outputs.*, '\n')}}
+            ${{ $(cat $HOME/output.txt) }}
           check_for_duplicate_msg: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
